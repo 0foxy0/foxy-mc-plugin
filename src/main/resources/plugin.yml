@@ -1,0 +1,10 @@
+name: FoxPlugin
+version: '${project.version}'
+main: de.foxy.main.Main
+api-version: 1.18
+authors: [ foxy ]
+commands:
+  heal:
+  fly:
+  gamemode:
+    aliases: gm,
