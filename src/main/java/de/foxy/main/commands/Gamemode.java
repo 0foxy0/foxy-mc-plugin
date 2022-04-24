@@ -3,11 +3,14 @@ package de.foxy.main.commands;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-public class Gamemode implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Gamemode implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player) && args.length < 2) {
@@ -68,7 +71,7 @@ public class Gamemode implements CommandExecutor {
         if (args.length == 1) {
             Player player = (Player) sender;
 
-            GameMode gm = GameMode.SURVIVAL;
+            GameMode gm;
 
             if (args[0].equalsIgnoreCase("1")) {
                 gm = GameMode.CREATIVE;
@@ -110,5 +113,36 @@ public class Gamemode implements CommandExecutor {
         }
 
         return false;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if (args.length == 1){
+            List<String> arguments = new ArrayList<>();
+            arguments.add("creative");
+            arguments.add("survival");
+            arguments.add("adventure");
+            arguments.add("spectator");
+
+            Player[] players = new Player[Bukkit.getServer().getOnlinePlayers().size()];
+            Bukkit.getServer().getOnlinePlayers().toArray(players);
+
+            for (int i = 0; i < players.length; i++){
+                arguments.add(players[i].getName());
+            }
+
+            return arguments;
+        }
+
+        if (args.length == 2) {
+            List<String> arguments = new ArrayList<>();
+            arguments.add("creative");
+            arguments.add("survival");
+            arguments.add("adventure");
+            arguments.add("spectator");
+
+            return arguments;
+        }
+        return null;
     }
 }

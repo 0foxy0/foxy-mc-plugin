@@ -1,8 +1,6 @@
 package de.foxy.main.commands;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
